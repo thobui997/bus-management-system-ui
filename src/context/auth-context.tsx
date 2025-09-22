@@ -26,9 +26,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const loginAction = async (payload: { email: string; password: string }) => {
     try {
-      const response = await login(payload.email, payload.password);
-      // setStoredValue(response.data);
-      // setAuthInfo(response);
+      const { session } = await login(payload.email, payload.password);
+      const authInfo = { token: session.access_token, refreshToken: session.refresh_token };
+      setStoredValue(authInfo);
+      setAuthInfo(authInfo);
 
       // const userInfo = await getCurrentUser();
       // setUserInfo(userInfo?.result || null);

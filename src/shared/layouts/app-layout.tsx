@@ -37,6 +37,7 @@ const AppLayout = () => {
           style={{ background: colorBgContainer, height: '100vh' }}
           trigger={null}
           collapsible
+          width={250}
         >
           <div className='logo-container'>
             <div className='logo-vertical'>

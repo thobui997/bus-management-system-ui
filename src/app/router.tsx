@@ -31,9 +31,11 @@ export const AppRouter = () => {
   return (
     <Routes>
       <Route path={paths.auth.login.path} element={<LoginRoute />} />
-      <Route element={<AppLayout />}>
-        <Route index element={<DashboardNavigate />} />
-        <Route path={paths.app.dashboard.path} element={<DashboardRoute />} />
+      <Route element={<ProtectedRoute />}>
+        <Route element={<AppLayout />}>
+          <Route index element={<DashboardNavigate />} />
+          <Route path={paths.app.dashboard.path} element={<DashboardRoute />} />
+        </Route>
       </Route>
     </Routes>
   );
