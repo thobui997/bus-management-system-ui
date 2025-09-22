@@ -31,8 +31,10 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': ['off', { allowConstantExport: true }],
+      'react-hooks/exhaustive-deps': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-empty-object-type': 'off',
       'check-file/filename-naming-convention': [
         'error',
         {
@@ -48,6 +50,7 @@ export default tseslint.config(
           'src/**/!(__tests__)/*': 'KEBAB_CASE'
         }
       ],
+      'import/named': 'off',
       'import/default': 'off',
       'import/no-named-as-default-member': 'off',
       'import/no-named-as-default': 'off',
