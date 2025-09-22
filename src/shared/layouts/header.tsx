@@ -1,6 +1,7 @@
 import { InteractionOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { paths } from '@app/config/paths';
-import { Affix, Avatar, Dropdown, Layout, MenuProps, Space, theme, Typography } from 'antd';
+import { Affix, Avatar, Badge, Dropdown, Layout, MenuProps, Space, theme, Typography } from 'antd';
+import { Bell } from 'lucide-react';
 
 const { Header } = Layout;
 
@@ -40,21 +41,23 @@ const HeaderComponent = () => {
         <a href='/'>
           <div className='logo'>lOGO</div>
         </a>
-        <div className='layout-page-header-main'>
-          <div className='actions'>
-            <Dropdown menu={{ items }} overlayStyle={{ width: 200 }}>
-              <Space style={{ cursor: 'pointer' }}>
-                <Avatar
-                  style={{ backgroundColor: '#87d068' }}
-                  icon={<UserOutlined />}
-                  src='https://media.istockphoto.com/id/588348500/vector/male-avatar-profile-picture-vector.jpg?s=612x612&w=0&k=20&c=tPPah8S9tmcyOXCft1Ct0tCAdpfSaUNhGzJK7kQiQCg='
-                >
-                  Super Admin
-                </Avatar>
-                <Typography.Text style={{ color: '#333' }}> Super Admin</Typography.Text>
-              </Space>
-            </Dropdown>
-          </div>
+        <div className='layout-page-header-actions'>
+          <Badge count={5} size='small'>
+            <Bell size={20} />
+          </Badge>
+
+          <Dropdown menu={{ items }} overlayStyle={{ width: 200 }}>
+            <Space style={{ cursor: 'pointer' }}>
+              <Avatar
+                style={{ backgroundColor: '#87d068' }}
+                icon={<UserOutlined />}
+                src='https://media.istockphoto.com/id/588348500/vector/male-avatar-profile-picture-vector.jpg?s=612x612&w=0&k=20&c=tPPah8S9tmcyOXCft1Ct0tCAdpfSaUNhGzJK7kQiQCg='
+              >
+                Super Admin
+              </Avatar>
+              <Typography.Text style={{ color: '#333' }}> Super Admin</Typography.Text>
+            </Space>
+          </Dropdown>
         </div>
       </Header>
     </Affix>

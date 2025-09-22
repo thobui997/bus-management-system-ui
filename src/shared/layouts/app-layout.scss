@@ -7,6 +7,12 @@
     border-bottom: 1px solid #f0f0f0;
   }
 
+  &-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
   &-sider {
     border-right: 1px solid #f0f0f0;
   }
