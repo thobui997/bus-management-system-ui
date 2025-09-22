@@ -34,7 +34,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       // setUserInfo(userInfo?.result || null);
       // setStoredUser(userInfo?.result);
 
-      const redirectTo = searchParams.get('redirectTo') || '/';
+      const redirectTo = searchParams.get('redirectTo') || '/dashboard';
       navigate(redirectTo, { replace: true });
     } catch (err: any) {
       notification.showNotification('error', 'Đăng nhập thất bại', 'Email hoặc mật khẩu không đúng');

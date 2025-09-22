@@ -7,5 +7,9 @@ export const paths = {
     }
   },
 
-  app: {}
+  app: {
+    dashboard: {
+      path: '/dashboard'
+    }
+  }
 } as const;
