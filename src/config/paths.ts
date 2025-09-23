@@ -10,6 +10,15 @@ export const paths = {
   app: {
     dashboard: {
       path: '/dashboard'
+    },
+    vehicleManagement: {
+      path: '/vehicle-management',
+      vehicleFleet: {
+        path: '/vehicle-management/fleet'
+      },
+      vehicleTypes: {
+        path: '/vehicle-management/vehicle-types'
+      }
     }
   }
 } as const;

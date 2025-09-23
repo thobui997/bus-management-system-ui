@@ -59,8 +59,10 @@ const AppLayout = () => {
 
       <Layout>
         <HeaderComponent />
-        <Content className='layout-page-content'>
-          <Outlet />
+        <Content className='!m-6 flex flex-col flex-1'>
+          <div className='!p-4 flex flex-col flex-1 gap-6'>
+            <Outlet />
+          </div>
         </Content>
       </Layout>
     </Layout>

@@ -63,7 +63,7 @@ const MenuComponent = ({ menuList, openKey, onChangeOpenKey, selectedKey, onChan
               label: getTitle(menu),
               children: menu.children.map((child) => ({
                 key: child.code,
-                label: child.label
+                label: getTitle(child)
               }))
             }
           : {
