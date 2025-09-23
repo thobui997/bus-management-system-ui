@@ -23,24 +23,24 @@ const menuList: MenuList = [
     code: paths.app.dashboard.path,
     label: 'Dashboard',
     path: paths.app.dashboard.path,
-    icon: React.createElement(LayoutDashboard, { size: 20, style: { marginRight: 10 } })
+    icon: React.createElement(LayoutDashboard, { size: 20 })
   },
   {
     code: paths.app.vehicleManagement.path,
     label: 'Vehicle Management',
     path: paths.app.vehicleManagement.path,
-    icon: React.createElement(Bus, { size: 20, style: { marginRight: 10 } }),
+    icon: React.createElement(Bus, { size: 20 }),
     children: [
       {
         code: paths.app.vehicleManagement.vehicleFleet.path,
         label: 'Vehicle Fleet',
-        icon: React.createElement(Diamond, { size: 16, style: { marginRight: 8 } }),
+        icon: React.createElement(Diamond, { size: 16 }),
         path: paths.app.vehicleManagement.vehicleFleet.path
       },
       {
         code: paths.app.vehicleManagement.vehicleTypes.path,
         label: 'Vehicle Types',
-        icon: React.createElement(Diamond, { size: 16, style: { marginRight: 8 } }),
+        icon: React.createElement(Diamond, { size: 16 }),
         path: paths.app.vehicleManagement.vehicleTypes.path
       }
     ]

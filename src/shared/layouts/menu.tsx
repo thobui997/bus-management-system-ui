@@ -13,24 +13,9 @@ type MenuProps = {
 const MenuComponent = ({ menuList, openKey, onChangeOpenKey, selectedKey, onChangeSelectedKey }: MenuProps) => {
   const navigate = useNavigate();
 
-  const findParentPath = (path: string) => {
-    const pathSegments = path.split('/').filter(Boolean);
-
-    if (pathSegments.length > 1) {
-      const parentPath = '/' + pathSegments[0];
-      const parentExists = menuList.some((menu) => menu.path === parentPath);
-
-      if (parentExists) {
-        return parentPath;
-      }
-    }
-
-    return path;
-  };
-
   const getTitle = (menu: MenuList[0]) => {
     return (
-      <span style={{ display: 'flex', alignItems: 'center' }}>
+      <span className='flex items-center gap-4'>
         {menu.icon && menu.icon}
         <span>{menu.label}</span>
       </span>
@@ -47,13 +32,14 @@ const MenuComponent = ({ menuList, openKey, onChangeOpenKey, selectedKey, onChan
     onChangeOpenKey(key);
   };
 
-  const activeMenuKey = findParentPath(selectedKey);
+  const defaultOpenKeys = menuList.filter((menu) => menu.children && menu.children.length).map((m) => m.code);
 
   return (
     <Menu
       mode='inline'
-      selectedKeys={[activeMenuKey]}
-      openKeys={openKey ? [openKey] : []}
+      defaultOpenKeys={defaultOpenKeys}
+      selectedKeys={[selectedKey]}
+      openKeys={openKey ? [openKey] : defaultOpenKeys}
       onOpenChange={onOpenChange}
       onSelect={(k) => onMenuClick(k.key)}
       items={menuList.map((menu) => {
@@ -67,7 +53,7 @@ const MenuComponent = ({ menuList, openKey, onChangeOpenKey, selectedKey, onChan
               }))
             }
           : {
-              key: menu.path,
+              key: menu.code,
               label: getTitle(menu)
             };
       })}

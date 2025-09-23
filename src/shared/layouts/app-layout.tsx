@@ -15,7 +15,7 @@ const AppLayout = () => {
   } = theme.useToken();
   const location = useLocation();
 
-  const [openKey, setOpenkey] = useState<string>(paths.app + '1');
+  const [openKey, setOpenkey] = useState<string>('');
   const [selectedKey, setSelectedKey] = useState<string>(location.pathname);
 
   if (location.pathname !== selectedKey) {
