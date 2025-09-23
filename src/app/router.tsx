@@ -6,7 +6,7 @@ import { lazy } from 'react';
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
 
 const DashboardRoute = lazy(() => import('./pages/app/dashboard-route'));
-const VehicleFleetRoute = lazy(() => import('./pages/app/vehicle/vehicle-fleet-route'));
+const VehicleFleetRoute = lazy(() => import('./pages/app/vehicle-management/vehicle-fleet-route'));
 
 const ProtectedRoute = () => {
   const user = useAuth();
