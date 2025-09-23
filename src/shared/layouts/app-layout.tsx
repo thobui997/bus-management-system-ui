@@ -59,10 +59,8 @@ const AppLayout = () => {
 
       <Layout>
         <HeaderComponent />
-        <Content className='!m-6 flex flex-col flex-1 overflow-hidden'>
-          <div className='!p-4 flex flex-col flex-1 gap-6 overflow-hidden'>
-            <Outlet />
-          </div>
+        <Content className='!m-6 overflow-y-auto h-[calc(100dvh_-_32px_-_64px_-_48px)]'>
+          <Outlet />
         </Content>
       </Layout>
     </Layout>

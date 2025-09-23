@@ -1,6 +1,7 @@
-import { PageTitle, SearchInput } from '@app/shared/components';
+import { PageTitle, SearchInput, AppTable } from '@app/shared/components';
 import BoxLayout from '@app/shared/layouts/box-layout';
-import { Button, Space, Table, TableProps, Tag } from 'antd';
+import Container from '@app/shared/layouts/Container';
+import { Button, Space, TableProps, Tag } from 'antd';
 import { Plus } from 'lucide-react';
 
 interface DataType {
@@ -86,7 +87,7 @@ const data: DataType[] = [
 
 const VehicleFleetRoute = () => {
   return (
-    <>
+    <Container>
       <div className='flex items-center justify-between'>
         <PageTitle title='Vehicle Fleet' subTitle='Mange your fleet of vehicles' />
         <Button type='primary' size='large' icon={<Plus size={18} />}>
@@ -96,9 +97,9 @@ const VehicleFleetRoute = () => {
 
       <BoxLayout className='flex flex-col gap-6'>
         <SearchInput placeholder='Search vehicles...' handleSearch={() => {}} />
-        <Table<DataType> columns={columns} dataSource={data} size='large' />
+        <AppTable columns={columns} dataSource={data} />
       </BoxLayout>
-    </>
+    </Container>
   );
 };
 
