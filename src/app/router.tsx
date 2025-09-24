@@ -7,6 +7,7 @@ import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
 
 const DashboardRoute = lazy(() => import('./pages/app/dashboard-route'));
 const VehicleFleetRoute = lazy(() => import('./pages/app/vehicle-management/vehicle-fleet-route'));
+const VehicleTypeRoute = lazy(() => import('./pages/app/vehicle-management/vehicle-type-route'));
 
 const ProtectedRoute = () => {
   const user = useAuth();
@@ -37,6 +38,7 @@ export const AppRouter = () => {
           <Route index element={<DashboardNavigate />} />
           <Route path={paths.app.dashboard.path} element={<DashboardRoute />} />
           <Route path={paths.app.vehicleManagement.vehicleFleet.path} element={<VehicleFleetRoute />} />
+          <Route path={paths.app.vehicleManagement.vehicleTypes.path} element={<VehicleTypeRoute />} />
         </Route>
       </Route>
     </Routes>
