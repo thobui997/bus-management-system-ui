@@ -15,6 +15,7 @@ const SearchInput = ({ handleSearch, placeholder, width = 300 }: SearchInputProp
       style={{ width }}
       size='large'
       onChange={handleSearch}
+      allowClear
     />
   );
 };
