@@ -13,10 +13,12 @@ type VehicleTypeListProps = {
 const VehicleTypeList = ({ vehicleTypesQuery }: VehicleTypeListProps) => {
   const [open, setOpen] = useState(false);
   const { handleSubmit, form, handleSetFormValues } = useUpdateVehicleTypeForm(setOpen);
+  const [id, setId] = useState(0);
 
   const onEdit = (record: VehicleType) => {
     setOpen(true);
     handleSetFormValues(record);
+    setId(record.id);
   };
 
   const { columns } = useColumn({ onEdit });
@@ -31,7 +33,15 @@ const VehicleTypeList = ({ vehicleTypesQuery }: VehicleTypeListProps) => {
       />
 
       {open && (
-        <VehicleTypeFormModal open={open} setOpen={setOpen} form={form} handleSubmit={handleSubmit} mode='edit' />
+        <VehicleTypeFormModal
+          open={open}
+          setOpen={setOpen}
+          form={form}
+          handleSubmit={async () => {
+            await handleSubmit(id);
+          }}
+          mode='edit'
+        />
       )}
     </>
   );

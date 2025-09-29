@@ -13,7 +13,7 @@ const VehicleTypeFormModal = ({ open, setOpen, form, handleSubmit, mode = 'creat
     <Modal
       open={open}
       title={mode === 'create' ? 'Create Vehicle Type' : 'Edit Vehicle Type'}
-      okText='Create'
+      okText={mode === 'create' ? 'Create' : 'Update'}
       cancelText='Cancel'
       okButtonProps={{ autoFocus: true, htmlType: 'submit' }}
       onCancel={() => setOpen(false)}

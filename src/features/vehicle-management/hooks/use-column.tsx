@@ -42,6 +42,7 @@ const useColumn = ({ onEdit, onDelete }: UseColumnProps) => {
       title: 'Action',
       width: 80,
       align: 'center',
+      fixed: 'right',
       render: (_, record) => (
         <Space className='!gap-0'>
           <EditButton onClick={() => onEdit(record)} />

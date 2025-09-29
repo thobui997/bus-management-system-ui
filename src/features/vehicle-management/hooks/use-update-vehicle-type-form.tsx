@@ -1,5 +1,5 @@
 import { useNotification } from '@app/context/notification-context';
-import { useCreateVehicleType } from '@app/features/vehicle-management/api/create-vehicle-type.api';
+import { useUpdateVehicleType } from '@app/features/vehicle-management/api/update-vehicle-type.api';
 import { VehicleType } from '@app/features/vehicle-management/types/vehicle-type.type';
 import { Form } from 'antd';
 
@@ -7,10 +7,10 @@ export const useUpdateVehicleTypeForm = (setOpenFromModal: React.Dispatch<React.
   const [form] = Form.useForm();
   const { showNotification } = useNotification();
 
-  const createVehicleTypeMutation = useCreateVehicleType({
+  const updateVehicleTypeMutation = useUpdateVehicleType({
     mutationConfig: {
       onSuccess: () => {
-        showNotification('success', 'Vehicle type created successfully');
+        showNotification('success', 'Vehicle type updated successfully');
         setOpenFromModal(false);
       },
       onError: () => {
@@ -19,11 +19,11 @@ export const useUpdateVehicleTypeForm = (setOpenFromModal: React.Dispatch<React.
     }
   });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (id: number) => {
     try {
       const formValues = await form.validateFields();
 
-      createVehicleTypeMutation.mutate(formValues);
+      updateVehicleTypeMutation.mutate({ id, ...formValues });
     } catch (error) {
       console.error('Error adding destination:', error);
     }
@@ -41,7 +41,7 @@ export const useUpdateVehicleTypeForm = (setOpenFromModal: React.Dispatch<React.
   return {
     form,
     handleSubmit,
-    isLoading: createVehicleTypeMutation.isPending,
+    isLoading: updateVehicleTypeMutation.isPending,
     handleSetFormValues
   };
 };
