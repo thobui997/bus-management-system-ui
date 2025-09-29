@@ -6,7 +6,7 @@ import { Space, TableProps } from 'antd';
 
 type UseColumnProps = {
   onEdit: (record: VehicleType) => void;
-  onDelete?: (record: VehicleType) => void;
+  onDelete: (record: VehicleType) => void;
 };
 
 const useColumn = ({ onEdit, onDelete }: UseColumnProps) => {
@@ -46,7 +46,10 @@ const useColumn = ({ onEdit, onDelete }: UseColumnProps) => {
       render: (_, record) => (
         <Space className='!gap-0'>
           <EditButton onClick={() => onEdit(record)} />
-          <ConfirmDeleteButton title='Are you sure you want to delete this vehicle type?' />
+          <ConfirmDeleteButton
+            title='Are you sure you want to delete this vehicle type?'
+            onConfirm={() => onDelete(record)}
+          />
         </Space>
       )
     }
