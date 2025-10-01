@@ -1,7 +1,8 @@
-import { useVehicleTypes } from '@app/features/vehicle-management/api/get-vehicle-types.api';
+
 import VehicleTypeFormModal from '@app/features/vehicle-management/components/vehicle-type-form-modal';
 import VehicleTypeList from '@app/features/vehicle-management/components/vehicle-type-list';
-import { useCreateVehicleTypeForm } from '@app/features/vehicle-management/hooks/use-create-vehicle-type-form';
+import { useVehicleTypes } from '@app/features/vehicle-management/vehicle-type/api/get-vehicle-types.api';
+import { useCreateVehicleTypeForm } from '@app/features/vehicle-management/vehicle-type/hooks/use-create-vehicle-type-form';
 import { useTableState } from '@app/hooks';
 import { PageTitle, SearchInput } from '@app/shared/components';
 import BoxLayout from '@app/shared/layouts/box-layout';

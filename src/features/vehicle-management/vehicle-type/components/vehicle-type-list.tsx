@@ -1,9 +1,13 @@
 import { useNotification } from '@app/context/notification-context';
-import { useDeleteVehicleType } from '@app/features/vehicle-management/api/delete-vehicle-type.api';
-import VehicleTypeFormModal from '@app/features/vehicle-management/components/vehicle-type-form-modal';
-import useColumn from '@app/features/vehicle-management/hooks/use-column';
-import { useUpdateVehicleTypeForm } from '@app/features/vehicle-management/hooks/use-update-vehicle-type-form';
-import { VehicleType, VehicleTypesResponse } from '@app/features/vehicle-management/types/vehicle-type.type';
+import { useDeleteVehicleType } from '@app/features/vehicle-management/vehicle-type/api/delete-vehicle-type.api';
+import VehicleTypeFormModal from '@app/features/vehicle-management/vehicle-type/components/vehicle-type-form-modal';
+
+import useColumn from '@app/features/vehicle-management/vehicle-type/hooks/use-column';
+import { useUpdateVehicleTypeForm } from '@app/features/vehicle-management/vehicle-type/hooks/use-update-vehicle-type-form';
+import {
+  VehicleType,
+  VehicleTypesResponse
+} from '@app/features/vehicle-management/vehicle-type/types/vehicle-type.type';
 import { AppTable } from '@app/shared/components';
 import { UseQueryResult } from '@tanstack/react-query';
 import { TablePaginationConfig } from 'antd';

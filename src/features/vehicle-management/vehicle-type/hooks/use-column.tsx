@@ -1,4 +1,4 @@
-import { VehicleType } from '@app/features/vehicle-management/types/vehicle-type.type';
+import { VehicleType } from '@app/features/vehicle-management/vehicle-type/types/vehicle-type.type';
 import dayjs from '@app/lib/date-utils';
 import { ConfirmDeleteButton, EditButton } from '@app/shared/components';
 import { DateFormat } from '@app/shared/contants';

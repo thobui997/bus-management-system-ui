@@ -1,4 +1,4 @@
-import { VehicleType, VehicleTypesParams } from '@app/features/vehicle-management/types/vehicle-type.type';
+import { VehicleType, VehicleTypesParams } from '@app/features/vehicle-management/vehicle-type/types/vehicle-type.type';
 import { QueryConfig } from '@app/lib/react-query';
 import { supabaseClient } from '@app/lib/supabase-client';
 import { queryOptions, useQuery } from '@tanstack/react-query';

@@ -1,6 +1,6 @@
 import { useNotification } from '@app/context/notification-context';
 import { useUpdateVehicleType } from '@app/features/vehicle-management/api/update-vehicle-type.api';
-import { VehicleType } from '@app/features/vehicle-management/types/vehicle-type.type';
+import { VehicleType } from '@app/features/vehicle-management/vehicle-type/types/vehicle-type.type';
 import { Form } from 'antd';
 
 export const useUpdateVehicleTypeForm = (setOpenFromModal: React.Dispatch<React.SetStateAction<boolean>>) => {
