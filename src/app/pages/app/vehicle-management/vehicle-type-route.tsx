@@ -1,7 +1,6 @@
-
-import VehicleTypeFormModal from '@app/features/vehicle-management/components/vehicle-type-form-modal';
-import VehicleTypeList from '@app/features/vehicle-management/components/vehicle-type-list';
 import { useVehicleTypes } from '@app/features/vehicle-management/vehicle-type/api/get-vehicle-types.api';
+import VehicleTypeFormModal from '@app/features/vehicle-management/vehicle-type/components/vehicle-type-form-modal';
+import VehicleTypeList from '@app/features/vehicle-management/vehicle-type/components/vehicle-type-list';
 import { useCreateVehicleTypeForm } from '@app/features/vehicle-management/vehicle-type/hooks/use-create-vehicle-type-form';
 import { useTableState } from '@app/hooks';
 import { PageTitle, SearchInput } from '@app/shared/components';
