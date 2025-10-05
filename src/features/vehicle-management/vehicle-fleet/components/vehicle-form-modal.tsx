@@ -1,5 +1,5 @@
-import { useVehicleTypes } from '@app/features/vehicle-management/vehicle-type/api/get-vehicle-types.api';
 import { VehicleStatus } from '@app/features/vehicle-management/vehicle-fleet/types/vehicle.type';
+import { useVehicleTypes } from '@app/features/vehicle-management/vehicle-type/api/get-vehicle-types.api';
 import { Form, FormInstance, Input, InputNumber, Modal, Select } from 'antd';
 
 type VehicleFormModalProps = {
@@ -76,8 +76,7 @@ const VehicleFormModal = ({ open, setOpen, form, handleSubmit, mode = 'create' }
             options={[
               { label: 'Active', value: VehicleStatus.ACTIVE },
               { label: 'Inactive', value: VehicleStatus.INACTIVE },
-              { label: 'Maintenance', value: VehicleStatus.MAINTENANCE },
-              { label: 'Retired', value: VehicleStatus.RETIRED }
+              { label: 'Maintenance', value: VehicleStatus.MAINTENANCE }
             ]}
           />
         </Form.Item>

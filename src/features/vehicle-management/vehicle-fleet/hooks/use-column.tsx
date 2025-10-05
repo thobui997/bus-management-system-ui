@@ -17,8 +17,6 @@ const getStatusColor = (status: VehicleStatus) => {
       return 'default';
     case VehicleStatus.MAINTENANCE:
       return 'orange';
-    case VehicleStatus.RETIRED:
-      return 'red';
     default:
       return 'default';
   }

@@ -3,8 +3,7 @@ import { BaseResponse } from '@app/shared/types/base-response.type';
 export enum VehicleStatus {
   ACTIVE = 'active',
   INACTIVE = 'inactive',
-  MAINTENANCE = 'maintenance',
-  RETIRED = 'retired'
+  MAINTENANCE = 'maintenance'
 }
 
 export interface Vehicle {
