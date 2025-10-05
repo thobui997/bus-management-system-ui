@@ -19,6 +19,9 @@ export const paths = {
       vehicleTypes: {
         path: '/vehicle-management/vehicle-types'
       }
+    },
+    station: {
+      path: '/station-management'
     }
   }
 } as const;
