@@ -5,7 +5,7 @@ import { useCreateVehicleTypeForm } from '@app/features/vehicle-management/vehic
 import { useTableState } from '@app/hooks';
 import { PageTitle, SearchInput } from '@app/shared/components';
 import BoxLayout from '@app/shared/layouts/box-layout';
-import Container from '@app/shared/layouts/Container';
+import Container from '@app/shared/layouts/container';
 import { Button } from 'antd';
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
