@@ -1,5 +1,5 @@
 import { useNotification } from '@app/context/notification-context';
-import { useUpdateVehicleType } from '@app/features/vehicle-management/api/update-vehicle-type.api';
+import { useUpdateVehicleType } from '@app/features/vehicle-management/vehicle-type/api/update-vehicle-type.api';
 import { VehicleType } from '@app/features/vehicle-management/vehicle-type/types/vehicle-type.type';
 import { Form } from 'antd';
 

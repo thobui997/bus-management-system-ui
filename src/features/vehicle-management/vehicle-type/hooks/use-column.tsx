@@ -28,14 +28,24 @@ const useColumn = ({ onEdit, onDelete }: UseColumnProps) => {
       dataIndex: 'created_at',
       key: 'created_at',
       width: 150,
-      render: (value) => dayjs(value).format(DateFormat.DATE_TIME_SHORT)
+      render: (value) => (
+        <div className='flex flex-col gap-1'>
+          <div>{dayjs(value).format(DateFormat.DATE_SLASH)}</div>
+          <div className='text-gray-500'>{dayjs(value).format(DateFormat.TIME_24H)}</div>
+        </div>
+      )
     },
     {
       title: 'Updated At',
       dataIndex: 'updated_at',
       key: 'updated_at',
       width: 150,
-      render: (value) => dayjs(value).format(DateFormat.DATE_TIME_SHORT)
+      render: (value) => (
+        <div className='flex flex-col gap-1'>
+          <div>{dayjs(value).format(DateFormat.DATE_SLASH)}</div>
+          <div className='text-gray-500'>{dayjs(value).format(DateFormat.TIME_24H)}</div>
+        </div>
+      )
     },
     {
       key: 'action',

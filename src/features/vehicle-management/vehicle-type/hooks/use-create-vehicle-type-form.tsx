@@ -1,5 +1,5 @@
 import { useNotification } from '@app/context/notification-context';
-import { useCreateVehicleType } from '@app/features/vehicle-management/api/create-vehicle-type.api';
+import { useCreateVehicleType } from '@app/features/vehicle-management/vehicle-type/api/create-vehicle-type.api';
 import { Form } from 'antd';
 
 export const useCreateVehicleTypeForm = (setOpenFromModal: React.Dispatch<React.SetStateAction<boolean>>) => {
