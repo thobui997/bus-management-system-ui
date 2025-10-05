@@ -22,6 +22,9 @@ export const paths = {
     },
     station: {
       path: '/station-management'
+    },
+    route: {
+      path: '/route-management'
     }
   }
 } as const;

@@ -1,6 +1,6 @@
 import { paths } from '@app/config/paths';
 import { MenuList } from '@app/shared/types/menu-item.type';
-import { Building, Bus, Diamond, LayoutDashboard } from 'lucide-react';
+import { Building, Bus, Diamond, LayoutDashboard, MapPin } from 'lucide-react';
 import React from 'react';
 
 // const menuItems = [
@@ -50,6 +50,12 @@ const menuList: MenuList = [
     label: 'Station Management',
     path: paths.app.station.path,
     icon: React.createElement(Building, { size: 20 })
+  },
+  {
+    code: paths.app.route.path,
+    label: 'Route Management',
+    path: paths.app.route.path,
+    icon: React.createElement(MapPin, { size: 20 })
   }
 ];
 
