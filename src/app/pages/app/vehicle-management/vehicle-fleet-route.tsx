@@ -1,11 +1,15 @@
 import { useMaintenanceLogs } from '@app/features/vehicle-management/vehicle-fleet/api/get-maintenance-logs.api';
 import { useVehicles } from '@app/features/vehicle-management/vehicle-fleet/api/get-vehicles.api';
+import MaintenanceLogFilter from '@app/features/vehicle-management/vehicle-fleet/components/maintenance-log-filter';
 import MaintenanceLogFormModal from '@app/features/vehicle-management/vehicle-fleet/components/maintenance-log-form-modal';
 import MaintenanceLogList from '@app/features/vehicle-management/vehicle-fleet/components/maintenance-log-list';
+import VehicleFilter from '@app/features/vehicle-management/vehicle-fleet/components/vehicle-filter';
 import VehicleFormModal from '@app/features/vehicle-management/vehicle-fleet/components/vehicle-form-modal';
 import VehicleList from '@app/features/vehicle-management/vehicle-fleet/components/vehicle-list';
 import { useCreateMaintenanceLogForm } from '@app/features/vehicle-management/vehicle-fleet/hooks/use-create-maintenance-log-form';
 import { useCreateVehicleForm } from '@app/features/vehicle-management/vehicle-fleet/hooks/use-create-vehicle-form';
+import { MaintenanceLogStatus } from '@app/features/vehicle-management/vehicle-fleet/types/maintenance-log.type';
+import { VehicleStatus } from '@app/features/vehicle-management/vehicle-fleet/types/vehicle.type';
 import { useTableState } from '@app/hooks';
 import { PageTitle, SearchInput } from '@app/shared/components';
 import BoxLayout from '@app/shared/layouts/box-layout';
@@ -18,6 +22,14 @@ const VehicleFleetRoute = () => {
   const [activeTab, setActiveTab] = useState('vehicles');
   const [openVehicle, setOpenVehicle] = useState(false);
   const [openMaintenance, setOpenMaintenance] = useState(false);
+
+  // Vehicle filters
+  const [vehicleStatus, setVehicleStatus] = useState<VehicleStatus | undefined>();
+  const [vehicleTypeId, setVehicleTypeId] = useState<number | undefined>();
+
+  // Maintenance filters
+  const [maintenanceStatus, setMaintenanceStatus] = useState<MaintenanceLogStatus | undefined>();
+  const [maintenanceVehicleId, setMaintenanceVehicleId] = useState<number | undefined>();
 
   const { handleSubmit: handleVehicleSubmit, form: vehicleForm } = useCreateVehicleForm(setOpenVehicle);
   const { handleSubmit: handleMaintenanceSubmit, form: maintenanceForm } =
@@ -41,7 +53,9 @@ const VehicleFleetRoute = () => {
     params: {
       search: vehicleTableState.search,
       page: vehicleTableState.page,
-      pageSize: vehicleTableState.pageSize
+      pageSize: vehicleTableState.pageSize,
+      status: vehicleStatus,
+      vehicle_type_id: vehicleTypeId
     }
   });
 
@@ -49,7 +63,9 @@ const VehicleFleetRoute = () => {
     params: {
       search: maintenanceTableState.search,
       page: maintenanceTableState.page,
-      pageSize: maintenanceTableState.pageSize
+      pageSize: maintenanceTableState.pageSize,
+      status: maintenanceStatus,
+      vehicle_id: maintenanceVehicleId
     }
   });
 
@@ -81,7 +97,10 @@ const VehicleFleetRoute = () => {
       label: 'Vehicles',
       children: (
         <BoxLayout className='flex flex-col gap-6'>
-          <SearchInput placeholder='Search vehicles...' handleSearch={(e) => handleVehicleSearch(e.target.value)} />
+          <div className='flex items-center justify-between gap-4'>
+            <SearchInput placeholder='Search vehicles...' handleSearch={(e) => handleVehicleSearch(e.target.value)} />
+            <VehicleFilter onStatusChange={setVehicleStatus} onVehicleTypeChange={setVehicleTypeId} />
+          </div>
           <VehicleList vehiclesQuery={vehiclesQuery} onPaginationChange={handleVehiclePaginationChange} />
         </BoxLayout>
       )
@@ -91,10 +110,13 @@ const VehicleFleetRoute = () => {
       label: 'Maintenance Logs',
       children: (
         <BoxLayout className='flex flex-col gap-6'>
-          <SearchInput
-            placeholder='Search maintenance logs...'
-            handleSearch={(e) => handleMaintenanceSearch(e.target.value)}
-          />
+          <div className='flex items-center justify-between gap-4'>
+            <SearchInput
+              placeholder='Search maintenance logs...'
+              handleSearch={(e) => handleMaintenanceSearch(e.target.value)}
+            />
+            <MaintenanceLogFilter onStatusChange={setMaintenanceStatus} onVehicleChange={setMaintenanceVehicleId} />
+          </div>
           <MaintenanceLogList
             maintenanceLogsQuery={maintenanceLogsQuery}
             onPaginationChange={handleMaintenancePaginationChange}
