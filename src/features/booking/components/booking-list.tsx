@@ -12,9 +12,10 @@ import { useState } from 'react';
 type BookingListProps = {
   bookingsQuery: UseQueryResult<BookingResponse, Error>;
   onPaginationChange: (page: number, pageSize: number) => void;
+  onManageTickets: (booking: Booking) => void;
 };
 
-const BookingList = ({ bookingsQuery, onPaginationChange }: BookingListProps) => {
+const BookingList = ({ bookingsQuery, onPaginationChange, onManageTickets }: BookingListProps) => {
   const [open, setOpen] = useState(false);
   const [id, setId] = useState(0);
 
@@ -41,7 +42,7 @@ const BookingList = ({ bookingsQuery, onPaginationChange }: BookingListProps) =>
     deleteMutation.mutate(record.id);
   };
 
-  const { columns } = useColumn({ onEdit, onDelete });
+  const { columns } = useColumn({ onEdit, onDelete, onManageTickets });
 
   const handleTableChange = (pagination: TablePaginationConfig) => {
     onPaginationChange(pagination.current ?? 1, pagination.pageSize ?? 10);

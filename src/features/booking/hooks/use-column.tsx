@@ -2,11 +2,13 @@ import { Booking, BookingStatus } from '@app/features/booking/types/booking.type
 import dayjs from '@app/lib/date-utils';
 import { ConfirmDeleteButton, EditButton } from '@app/shared/components';
 import { DateFormat } from '@app/shared/contants';
-import { Space, TableProps, Tag } from 'antd';
+import { Button, Space, TableProps, Tag, Tooltip } from 'antd';
+import { Ticket as TicketIcon } from 'lucide-react';
 
 type UseColumnProps = {
   onEdit: (record: Booking) => void;
   onDelete: (record: Booking) => void;
+  onManageTickets: (record: Booking) => void;
 };
 
 const getStatusColor = (status: BookingStatus) => {
@@ -22,7 +24,7 @@ const getStatusColor = (status: BookingStatus) => {
   }
 };
 
-const useColumn = ({ onEdit, onDelete }: UseColumnProps) => {
+const useColumn = ({ onEdit, onDelete, onManageTickets }: UseColumnProps) => {
   const columns: TableProps<Booking>['columns'] = [
     {
       title: 'Booking ID',
@@ -55,6 +57,25 @@ const useColumn = ({ onEdit, onDelete }: UseColumnProps) => {
           </div>
         </div>
       )
+    },
+    {
+      title: 'Tickets',
+      dataIndex: 'tickets',
+      key: 'tickets',
+      width: 120,
+      render: (tickets: any[]) => {
+        const count = tickets?.length || 0;
+        return (
+          <Tag color={count > 0 ? 'blue' : 'default'}>
+            <div className='flex items-center gap-1'>
+              <TicketIcon size={14} />
+              <span>
+                {count} {count === 1 ? 'ticket' : 'tickets'}
+              </span>
+            </div>
+          </Tag>
+        );
+      }
     },
     {
       title: 'Booking Time',
@@ -102,14 +123,17 @@ const useColumn = ({ onEdit, onDelete }: UseColumnProps) => {
     {
       key: 'action',
       title: 'Action',
-      width: 80,
+      width: 120,
       align: 'center',
       fixed: 'right',
       render: (_, record) => (
         <Space className='!gap-0'>
+          <Tooltip title='Manage Tickets'>
+            <Button icon={<TicketIcon size={20} />} type='text' size='large' onClick={() => onManageTickets(record)} />
+          </Tooltip>
           <EditButton onClick={() => onEdit(record)} />
           <ConfirmDeleteButton
-            title='Are you sure you want to delete this booking?'
+            title='Are you sure you want to delete this booking? This will also delete all associated tickets.'
             onConfirm={() => onDelete(record)}
           />
         </Space>

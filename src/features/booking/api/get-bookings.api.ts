@@ -8,7 +8,7 @@ export const getBookingsApi = async (params: BookingParams = {}) => {
 
   let query = supabaseClient.from('booking').select(
     `*,
-      customer:customer_id(id, full_name, email, phone),
+      customer:customer_id(id, full_name, email, phone_number),
       trip:trip_id(id, route_id, departure_time, arrival_time)`,
     { count: 'exact' }
   );

@@ -6,6 +6,16 @@ export enum BookingStatus {
   CANCELLED = 'cancelled'
 }
 
+export interface Ticket {
+  id: number;
+  booking_id: number;
+  seat_number: string;
+  price: number;
+  qrcode: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Booking {
   id: number;
   customer_id: number;
@@ -27,6 +37,7 @@ export interface Booking {
     departure_time: string;
     arrival_time: string;
   };
+  tickets?: Ticket[];
 }
 
 export type BookingParams = {
@@ -46,4 +57,10 @@ export type BookingFormValues = {
   booking_time: string;
   total_amount: number;
   status: BookingStatus;
+};
+
+export type TicketFormValues = {
+  seat_number: string;
+  price: number;
+  qrcode?: string;
 };
