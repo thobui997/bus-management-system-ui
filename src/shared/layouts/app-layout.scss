@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     z-index: 9;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #d1d1d1;
   }
 
   &-header-actions {
@@ -14,15 +14,15 @@
   }
 
   &-sider {
-    border-right: 1px solid #f0f0f0;
+    border-right: 0.5px solid #d1d1d1;
   }
 
   .logo-container {
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #d1d1d1;
     margin-bottom: 16px;
 
     .logo-vertical {
-      height: 32px;
+      height: 31px;
       margin: 16px;
       display: flex;
       align-items: center;

@@ -1,7 +1,7 @@
 import { InteractionOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { paths } from '@app/config/paths';
-import { Affix, Avatar, Badge, Dropdown, Layout, MenuProps, Space, theme, Typography } from 'antd';
-import { Bell } from 'lucide-react';
+import { Affix, Avatar, Badge, Button, Dropdown, Layout, MenuProps, Space, theme, Typography } from 'antd';
+import { Bell, Menu } from 'lucide-react';
 
 const { Header } = Layout;
 
@@ -38,9 +38,7 @@ const HeaderComponent = () => {
   return (
     <Affix offsetTop={0}>
       <Header className='layout-page-header' style={{ background: colorBgContainer }}>
-        <a href='/'>
-          <div className='logo'>lOGO</div>
-        </a>
+        <Button icon={<Menu />} type='text' />
         <div className='layout-page-header-actions'>
           <Badge count={5} size='small'>
             <Bell size={20} />
