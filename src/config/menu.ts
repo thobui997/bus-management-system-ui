@@ -1,6 +1,17 @@
 import { paths } from '@app/config/paths';
 import { MenuList } from '@app/shared/types/menu-item.type';
-import { Building, Bus, Calendar, Diamond, LayoutDashboard, MapPin, Ticket, User, Users } from 'lucide-react';
+import {
+  Building,
+  Bus,
+  Calendar,
+  CreditCard,
+  Diamond,
+  LayoutDashboard,
+  MapPin,
+  Ticket,
+  User,
+  Users
+} from 'lucide-react';
 import React from 'react';
 
 // const menuItems = [
@@ -80,6 +91,12 @@ const menuList: MenuList = [
     label: 'Ticketing & Booking',
     path: paths.app.booking.path,
     icon: React.createElement(Ticket, { size: 20 })
+  },
+  {
+    code: paths.app.payment.path,
+    label: 'Payment Management',
+    path: paths.app.payment.path,
+    icon: React.createElement(CreditCard, { size: 20 })
   }
 ];
 

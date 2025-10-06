@@ -3,12 +3,13 @@ import dayjs from '@app/lib/date-utils';
 import { ConfirmDeleteButton, EditButton } from '@app/shared/components';
 import { DateFormat } from '@app/shared/contants';
 import { Button, Space, TableProps, Tag, Tooltip } from 'antd';
-import { Ticket as TicketIcon } from 'lucide-react';
+import { CreditCard, Ticket as TicketIcon } from 'lucide-react';
 
 type UseColumnProps = {
   onEdit: (record: Booking) => void;
   onDelete: (record: Booking) => void;
   onManageTickets: (record: Booking) => void;
+  onCreatePayment?: (record: Booking) => void; // Add this
 };
 
 const getStatusColor = (status: BookingStatus) => {
@@ -24,7 +25,7 @@ const getStatusColor = (status: BookingStatus) => {
   }
 };
 
-const useColumn = ({ onEdit, onDelete, onManageTickets }: UseColumnProps) => {
+const useColumn = ({ onEdit, onDelete, onManageTickets, onCreatePayment }: UseColumnProps) => {
   const columns: TableProps<Booking>['columns'] = [
     {
       title: 'Booking ID',
@@ -123,11 +124,22 @@ const useColumn = ({ onEdit, onDelete, onManageTickets }: UseColumnProps) => {
     {
       key: 'action',
       title: 'Action',
-      width: 120,
+      width: 150,
       align: 'center',
       fixed: 'right',
       render: (_, record) => (
         <Space className='!gap-0'>
+          {record.status === BookingStatus.PENDING_PAYMENT && onCreatePayment && (
+            <Tooltip title='Create Payment'>
+              <Button
+                icon={<CreditCard size={20} />}
+                type='text'
+                size='large'
+                className='text-green-600'
+                onClick={() => onCreatePayment(record)}
+              />
+            </Tooltip>
+          )}
           <Tooltip title='Manage Tickets'>
             <Button icon={<TicketIcon size={20} />} type='text' size='large' onClick={() => onManageTickets(record)} />
           </Tooltip>

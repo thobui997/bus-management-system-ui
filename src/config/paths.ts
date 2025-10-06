@@ -37,6 +37,9 @@ export const paths = {
     },
     booking: {
       path: '/booking-management'
+    },
+    payment: {
+      path: '/payment-management'
     }
   }
 } as const;
