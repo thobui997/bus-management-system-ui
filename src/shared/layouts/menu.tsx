@@ -28,8 +28,18 @@ const MenuComponent = ({ menuList, openKey, onChangeOpenKey, selectedKey, onChan
   };
 
   const onOpenChange = (keys: string[]) => {
-    const key = keys.pop();
-    onChangeOpenKey(key);
+    if (keys.length === 0) {
+      onChangeOpenKey(undefined);
+      return;
+    }
+
+    const latestKey = keys[keys.length - 1];
+
+    if (openKey === latestKey) {
+      onChangeOpenKey(undefined);
+    } else {
+      onChangeOpenKey(latestKey);
+    }
   };
 
   const defaultOpenKeys = menuList.filter((menu) => menu.children && menu.children.length).map((m) => m.code);
@@ -39,7 +49,7 @@ const MenuComponent = ({ menuList, openKey, onChangeOpenKey, selectedKey, onChan
       mode='inline'
       defaultOpenKeys={defaultOpenKeys}
       selectedKeys={[selectedKey]}
-      openKeys={openKey ? [openKey] : defaultOpenKeys}
+      openKeys={openKey ? [openKey] : []}
       onOpenChange={onOpenChange}
       onSelect={(k) => onMenuClick(k.key)}
       items={menuList.map((menu) => {
