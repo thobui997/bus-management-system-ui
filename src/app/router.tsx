@@ -12,6 +12,7 @@ const StationRoute = lazy(() => import('./pages/app/station-route'));
 const RouteManagementRoute = lazy(() => import('./pages/app/route-management-route'));
 const EmployeeRoute = lazy(() => import('./pages/app/employee-route'));
 const TripSchedulingRoute = lazy(() => import('./pages/app/trip-scheduling-route'));
+const CustomerRoute = lazy(() => import('./pages/app/customer-route'));
 
 const ProtectedRoute = () => {
   const user = useAuth();
@@ -47,6 +48,7 @@ export const AppRouter = () => {
           <Route path={paths.app.route.path} element={<RouteManagementRoute />} />
           <Route path={paths.app.employee.path} element={<EmployeeRoute />} />
           <Route path={paths.app.tripScheduling.path} element={<TripSchedulingRoute />} />
+          <Route path={paths.app.customer.path} element={<CustomerRoute />} />
         </Route>
       </Route>
     </Routes>
