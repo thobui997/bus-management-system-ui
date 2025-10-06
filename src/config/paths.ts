@@ -28,6 +28,9 @@ export const paths = {
     },
     employee: {
       path: '/employee-management'
+    },
+    tripScheduling: {
+      path: '/trip-scheduling'
     }
   }
 } as const;
