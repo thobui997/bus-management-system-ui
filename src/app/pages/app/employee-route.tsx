@@ -44,7 +44,7 @@ const EmployeeRoute = () => {
         </Button>
       </div>
 
-      <BoxLayout className='flex flex-col gap-6'>
+      <BoxLayout className='flex flex-col gap-6 overflow-hidden'>
         <SearchInput placeholder='Search employees...' handleSearch={(e) => handleSearch(e.target.value)} />
         <EmployeeList employeesQuery={employeesQuery} onPaginationChange={handlePaginationChange} />
       </BoxLayout>

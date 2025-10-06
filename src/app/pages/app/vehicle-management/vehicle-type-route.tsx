@@ -45,7 +45,7 @@ const VehicleTypeRoute = () => {
         {open && <VehicleTypeFormModal open={open} setOpen={setOpen} form={form} handleSubmit={handleSubmit} />}
       </div>
 
-      <BoxLayout className='flex flex-col gap-6'>
+      <BoxLayout className='flex flex-col gap-6 overflow-hidden'>
         <SearchInput placeholder='Search vehicle type' handleSearch={(e) => handleSearch(e.target.value)} />
         <VehicleTypeList vehicleTypesQuery={vehicleTypesQuery} onPaginationChange={handlePaginationChange} />
       </BoxLayout>

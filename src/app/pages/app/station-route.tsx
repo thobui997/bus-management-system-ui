@@ -46,7 +46,7 @@ const StationRoute = () => {
         {open && <StationFormModal open={open} setOpen={setOpen} form={form} handleSubmit={handleSubmit} />}
       </div>
 
-      <BoxLayout className='flex flex-col gap-6'>
+      <BoxLayout className='flex flex-col gap-6 overflow-hidden'>
         <SearchInput placeholder='Search stations...' handleSearch={(e) => handleSearch(e.target.value)} />
         <StationList stationsQuery={stationsQuery} onPaginationChange={handlePaginationChange} />
       </BoxLayout>

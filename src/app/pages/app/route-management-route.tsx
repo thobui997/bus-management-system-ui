@@ -53,7 +53,7 @@ const RouteManagementRoute = () => {
         </Button>
       </div>
 
-      <BoxLayout className='flex flex-col gap-6'>
+      <BoxLayout className='flex flex-col gap-6 overflow-hidden'>
         <SearchInput placeholder='Search routes...' handleSearch={(e) => handleSearch(e.target.value)} />
         <RouteList
           routesQuery={routesQuery}

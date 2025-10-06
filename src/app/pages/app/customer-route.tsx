@@ -44,7 +44,7 @@ const CustomerRoute = () => {
         </Button>
       </div>
 
-      <BoxLayout className='flex flex-col gap-6'>
+      <BoxLayout className='flex flex-col gap-6 overflow-hidden'>
         <SearchInput placeholder='Search customers...' handleSearch={(e) => handleSearch(e.target.value)} />
         <CustomerList customersQuery={customersQuery} onPaginationChange={handlePaginationChange} />
       </BoxLayout>

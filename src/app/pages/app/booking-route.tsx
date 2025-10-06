@@ -65,7 +65,7 @@ const BookingRoute = () => {
         </Button>
       </div>
 
-      <BoxLayout className='flex flex-col gap-6'>
+      <BoxLayout className='flex flex-col gap-6 overflow-hidden'>
         <div className='flex items-center justify-between gap-4'>
           <SearchInput placeholder='Search bookings...' handleSearch={(e) => handleSearch(e.target.value)} />
           <BookingFilter onStatusChange={setBookingStatus} />
