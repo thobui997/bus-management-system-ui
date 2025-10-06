@@ -25,6 +25,9 @@ export const paths = {
     },
     route: {
       path: '/route-management'
+    },
+    employee: {
+      path: '/employee-management'
     }
   }
 } as const;

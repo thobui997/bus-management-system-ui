@@ -10,6 +10,7 @@ const VehicleFleetRoute = lazy(() => import('./pages/app/vehicle-management/vehi
 const VehicleTypeRoute = lazy(() => import('./pages/app/vehicle-management/vehicle-type-route'));
 const StationRoute = lazy(() => import('./pages/app/station-route'));
 const RouteManagementRoute = lazy(() => import('./pages/app/route-management-route'));
+const EmployeeRoute = lazy(() => import('./pages/app/employee-route'));
 
 const ProtectedRoute = () => {
   const user = useAuth();
@@ -43,6 +44,7 @@ export const AppRouter = () => {
           <Route path={paths.app.vehicleManagement.vehicleTypes.path} element={<VehicleTypeRoute />} />
           <Route path={paths.app.station.path} element={<StationRoute />} />
           <Route path={paths.app.route.path} element={<RouteManagementRoute />} />
+          <Route path={paths.app.employee.path} element={<EmployeeRoute />} />
         </Route>
       </Route>
     </Routes>
