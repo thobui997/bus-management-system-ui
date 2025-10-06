@@ -2,7 +2,6 @@ import { useBookings } from '@app/features/booking/api/get-bookings.api';
 import BookingFilter from '@app/features/booking/components/booking-filter';
 import BookingFormModal from '@app/features/booking/components/booking-form-modal';
 import BookingList from '@app/features/booking/components/booking-list';
-import BookingTicketsModal from '@app/features/booking/components/booking-tickets-modal';
 import { useCreateBookingForm } from '@app/features/booking/hooks/use-create-booking-form';
 import { Booking, BookingStatus } from '@app/features/booking/types/booking.type';
 import PaymentFormModal from '@app/features/payment/components/payment-form-modal';
@@ -19,9 +18,7 @@ import { useState } from 'react';
 
 const BookingRoute = () => {
   const [open, setOpen] = useState(false);
-  const [ticketsModalOpen, setTicketsModalOpen] = useState(false);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
-  const [selectedBookingId, setSelectedBookingId] = useState<number>(0);
   const [bookingStatus, setBookingStatus] = useState<BookingStatus | undefined>();
 
   const { handleSubmit, form } = useCreateBookingForm(setOpen);
@@ -48,13 +45,7 @@ const BookingRoute = () => {
     }
   };
 
-  const handleManageTickets = (booking: Booking) => {
-    setSelectedBookingId(booking.id);
-    setTicketsModalOpen(true);
-  };
-
   const handleCreatePayment = (booking: Booking) => {
-    setSelectedBookingId(booking.id);
     paymentForm.setFieldsValue({
       booking_id: booking.id,
       amount: booking.total_amount,
@@ -82,16 +73,11 @@ const BookingRoute = () => {
         <BookingList
           bookingsQuery={bookingsQuery}
           onPaginationChange={handlePaginationChange}
-          onManageTickets={handleManageTickets}
           onCreatePayment={handleCreatePayment}
         />
       </BoxLayout>
 
-      {open && <BookingFormModal open={open} setOpen={setOpen} form={form} handleSubmit={handleSubmit} />}
-
-      {ticketsModalOpen && (
-        <BookingTicketsModal open={ticketsModalOpen} setOpen={setTicketsModalOpen} bookingId={selectedBookingId} />
-      )}
+      {open && <BookingFormModal open={open} setOpen={setOpen} form={form} handleSubmit={handleSubmit} mode='create' />}
 
       {paymentModalOpen && (
         <PaymentFormModal

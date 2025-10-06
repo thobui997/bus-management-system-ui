@@ -4,12 +4,16 @@ import { supabaseClient } from '@app/lib/supabase-client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const createBookingApi = async (payload: BookingFormValues) => {
+  console.log('Payload sent to API:', payload); // Debug log
+
   const { data, error } = await supabaseClient.from('booking').insert([payload]).select();
 
   if (error) {
+    console.error('Supabase error:', error); // Debug log
     throw new Error(error.message);
   }
 
+  console.log('Created booking:', data); // Debug log
   return data;
 };
 

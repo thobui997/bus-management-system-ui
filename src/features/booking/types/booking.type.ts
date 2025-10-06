@@ -29,7 +29,7 @@ export interface Booking {
     id: number;
     full_name: string;
     email: string;
-    phone: string;
+    phone_number: string;
   };
   trip?: {
     id: number;

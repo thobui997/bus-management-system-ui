@@ -3,13 +3,13 @@ import dayjs from '@app/lib/date-utils';
 import { ConfirmDeleteButton, EditButton } from '@app/shared/components';
 import { DateFormat } from '@app/shared/contants';
 import { Button, Space, TableProps, Tag, Tooltip } from 'antd';
-import { CreditCard, Ticket as TicketIcon } from 'lucide-react';
+import { CreditCard, Eye, Ticket as TicketIcon } from 'lucide-react';
 
 type UseColumnProps = {
   onEdit: (record: Booking) => void;
   onDelete: (record: Booking) => void;
-  onManageTickets: (record: Booking) => void;
-  onCreatePayment?: (record: Booking) => void; // Add this
+  onCreatePayment?: (record: Booking) => void;
+  onViewDetail?: (record: Booking) => void; // Add this
 };
 
 const getStatusColor = (status: BookingStatus) => {
@@ -25,7 +25,7 @@ const getStatusColor = (status: BookingStatus) => {
   }
 };
 
-const useColumn = ({ onEdit, onDelete, onManageTickets, onCreatePayment }: UseColumnProps) => {
+const useColumn = ({ onEdit, onDelete, onCreatePayment, onViewDetail }: UseColumnProps) => {
   const columns: TableProps<Booking>['columns'] = [
     {
       title: 'Booking ID',
@@ -42,7 +42,7 @@ const useColumn = ({ onEdit, onDelete, onManageTickets, onCreatePayment }: UseCo
         <div className='flex flex-col'>
           <div className='font-semibold'>{record.customer?.full_name}</div>
           <div className='text-gray-500 text-xs'>{record.customer?.email}</div>
-          <div className='text-gray-500 text-xs'>{record.customer?.phone}</div>
+          <div className='text-gray-500 text-xs'>{record.customer?.phone_number}</div>
         </div>
       )
     },
@@ -61,18 +61,16 @@ const useColumn = ({ onEdit, onDelete, onManageTickets, onCreatePayment }: UseCo
     },
     {
       title: 'Tickets',
-      dataIndex: 'tickets',
       key: 'tickets',
       width: 120,
-      render: (tickets: any[]) => {
-        const count = tickets?.length || 0;
+      align: 'center',
+      render: (_, record) => {
+        const count = Array.isArray(record.tickets) ? record.tickets.length : 0;
         return (
           <Tag color={count > 0 ? 'blue' : 'default'}>
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-1 justify-center'>
               <TicketIcon size={14} />
-              <span>
-                {count} {count === 1 ? 'ticket' : 'tickets'}
-              </span>
+              <span className='font-semibold'>{count}</span>
             </div>
           </Tag>
         );
@@ -96,7 +94,7 @@ const useColumn = ({ onEdit, onDelete, onManageTickets, onCreatePayment }: UseCo
       key: 'total_amount',
       width: 130,
       align: 'right',
-      render: (value) => value.toLocaleString('vi-VN') + ' đ'
+      render: (value) => <span className='font-semibold'>{value.toLocaleString('vi-VN')} đ</span>
     },
     {
       title: 'Status',
@@ -129,6 +127,11 @@ const useColumn = ({ onEdit, onDelete, onManageTickets, onCreatePayment }: UseCo
       fixed: 'right',
       render: (_, record) => (
         <Space className='!gap-0'>
+          {onViewDetail && (
+            <Tooltip title='View Details'>
+              <Button icon={<Eye size={20} />} type='text' size='large' onClick={() => onViewDetail(record)} />
+            </Tooltip>
+          )}
           {record.status === BookingStatus.PENDING_PAYMENT && onCreatePayment && (
             <Tooltip title='Create Payment'>
               <Button
@@ -140,9 +143,6 @@ const useColumn = ({ onEdit, onDelete, onManageTickets, onCreatePayment }: UseCo
               />
             </Tooltip>
           )}
-          <Tooltip title='Manage Tickets'>
-            <Button icon={<TicketIcon size={20} />} type='text' size='large' onClick={() => onManageTickets(record)} />
-          </Tooltip>
           <EditButton onClick={() => onEdit(record)} />
           <ConfirmDeleteButton
             title='Are you sure you want to delete this booking? This will also delete all associated tickets.'

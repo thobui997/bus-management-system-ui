@@ -9,7 +9,8 @@ export const getBookingsApi = async (params: BookingParams = {}) => {
   let query = supabaseClient.from('booking').select(
     `*,
       customer:customer_id(id, full_name, email, phone_number),
-      trip:trip_id(id, route_id, departure_time, arrival_time)`,
+      trip:trip_id(id, route_id, departure_time, arrival_time),
+      tickets:ticket(id, seat_number, price, qrcode)`,
     { count: 'exact' }
   );
 
@@ -38,6 +39,7 @@ export const getBookingsApi = async (params: BookingParams = {}) => {
   const { data, error, count } = await query;
 
   if (error) {
+    console.error('Error fetching bookings:', error);
     throw new Error(error.message);
   }
 

@@ -1,6 +1,7 @@
 import { useNotification } from '@app/context/notification-context';
 import { useUpdateBooking } from '@app/features/booking/api/update-booking.api';
-import { Booking } from '@app/features/booking/types/booking.type';
+import { useManageTickets } from '@app/features/booking/api/manage-tickets.api';
+import { Booking, TicketFormValues } from '@app/features/booking/types/booking.type';
 import dayjs from '@app/lib/date-utils';
 import { Form } from 'antd';
 
@@ -13,17 +14,48 @@ export const useUpdateBookingForm = (setOpenFromModal: React.Dispatch<React.SetS
       onSuccess: () => {
         showNotification('success', 'Booking updated successfully');
         setOpenFromModal(false);
+        return;
       },
-      onError: () => {
-        showNotification('error', 'Failed to update booking');
+      onError: (error) => {
+        showNotification('error', 'Failed to update booking', error.message);
       }
     }
   });
 
-  const handleSubmit = async (id: number) => {
+  const manageTicketsMutation = useManageTickets({
+    mutationConfig: {
+      onSuccess: () => {
+        showNotification('success', 'Booking and tickets updated successfully');
+        setOpenFromModal(false);
+      },
+      onError: () => {
+        showNotification('error', 'Booking updated but failed to update tickets');
+        setOpenFromModal(false);
+      }
+    }
+  });
+
+  const handleSubmit = async (id: number, tickets: TicketFormValues[]) => {
     try {
       const formValues = await form.validateFields();
-      updateBookingMutation.mutate({ id, ...formValues });
+
+      // Calculate total_amount from tickets
+      const totalAmount = tickets.reduce((sum, ticket) => sum + (Number(ticket.price) || 0), 0);
+
+      // Prepare booking data with total_amount
+      const bookingData = {
+        ...formValues,
+        total_amount: totalAmount
+      };
+
+      // Step 1: Update booking
+      await updateBookingMutation.mutateAsync({ id, ...bookingData });
+
+      // Step 2: Update tickets
+      await manageTicketsMutation.mutateAsync({
+        bookingId: id,
+        tickets
+      });
     } catch (error) {
       console.error('Error updating booking:', error);
     }
@@ -35,16 +67,27 @@ export const useUpdateBookingForm = (setOpenFromModal: React.Dispatch<React.SetS
         customer_id: values.customer_id,
         trip_id: values.trip_id,
         booking_time: values.booking_time ? dayjs(values.booking_time) : null,
-        total_amount: values.total_amount,
         status: values.status
       });
     }, 0);
   };
 
+  const getInitialTickets = (booking: Booking): TicketFormValues[] => {
+    if (booking.tickets && booking.tickets.length > 0) {
+      return booking.tickets.map((ticket) => ({
+        seat_number: ticket.seat_number,
+        price: ticket.price,
+        qrcode: ticket.qrcode || ''
+      }));
+    }
+    return [{ seat_number: '', price: 0, qrcode: '' }];
+  };
+
   return {
     form,
     handleSubmit,
-    isLoading: updateBookingMutation.isPending,
-    handleSetFormValues
+    isLoading: updateBookingMutation.isPending || manageTicketsMutation.isPending,
+    handleSetFormValues,
+    getInitialTickets
   };
 };
