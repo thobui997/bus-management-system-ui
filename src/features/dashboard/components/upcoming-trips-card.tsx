@@ -32,6 +32,7 @@ const UpcomingTripsCard = () => {
         <List
           dataSource={trips}
           locale={{ emptyText: 'No upcoming trips found' }}
+          className='max-h-80 overflow-y-auto'
           renderItem={(trip) => (
             <List.Item>
               <div className='flex justify-between items-center w-full'>

@@ -31,6 +31,7 @@ const RecentBookingsCard = () => {
       ) : (
         <List
           dataSource={bookings}
+          className='max-h-80 overflow-y-auto'
           renderItem={(booking) => (
             <List.Item>
               <div className='flex justify-between items-center w-full'>
