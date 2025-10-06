@@ -1,0 +1,64 @@
+import { useBookings } from '@app/features/booking/api/get-bookings.api';
+import BookingFilter from '@app/features/booking/components/booking-filter';
+import BookingFormModal from '@app/features/booking/components/booking-form-modal';
+import BookingList from '@app/features/booking/components/booking-list';
+import { useCreateBookingForm } from '@app/features/booking/hooks/use-create-booking-form';
+import { BookingStatus } from '@app/features/booking/types/booking.type';
+import { useTableState } from '@app/hooks';
+import { PageTitle, SearchInput } from '@app/shared/components';
+import BoxLayout from '@app/shared/layouts/box-layout';
+import Container from '@app/shared/layouts/container';
+import { Button } from 'antd';
+import { Plus } from 'lucide-react';
+import { useState } from 'react';
+
+const BookingRoute = () => {
+  const [open, setOpen] = useState(false);
+  const [bookingStatus, setBookingStatus] = useState<BookingStatus | undefined>();
+  const { handleSubmit, form } = useCreateBookingForm(setOpen);
+
+  const { tableState, setSearch, setPage, setPageSize } = useTableState();
+
+  const bookingsQuery = useBookings({
+    params: {
+      search: tableState.search,
+      page: tableState.page,
+      pageSize: tableState.pageSize,
+      status: bookingStatus
+    }
+  });
+
+  const handleSearch = (value: string) => {
+    setSearch(value);
+  };
+
+  const handlePaginationChange = (page: number, pageSize: number) => {
+    setPage(page);
+    if (pageSize !== tableState.pageSize) {
+      setPageSize(pageSize);
+    }
+  };
+
+  return (
+    <Container>
+      <div className='flex items-center justify-between'>
+        <PageTitle title='Booking Management' subTitle='Manage customer bookings and reservations' />
+        <Button type='primary' size='large' icon={<Plus size={18} />} onClick={() => setOpen(true)}>
+          Add Booking
+        </Button>
+      </div>
+
+      <BoxLayout className='flex flex-col gap-6'>
+        <div className='flex items-center justify-between gap-4'>
+          <SearchInput placeholder='Search bookings...' handleSearch={(e) => handleSearch(e.target.value)} />
+          <BookingFilter onStatusChange={setBookingStatus} />
+        </div>
+        <BookingList bookingsQuery={bookingsQuery} onPaginationChange={handlePaginationChange} />
+      </BoxLayout>
+
+      {open && <BookingFormModal open={open} setOpen={setOpen} form={form} handleSubmit={handleSubmit} />}
+    </Container>
+  );
+};
+
+export default BookingRoute;

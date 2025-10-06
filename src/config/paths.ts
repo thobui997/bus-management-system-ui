@@ -34,6 +34,9 @@ export const paths = {
     },
     customer: {
       path: '/customer-management'
+    },
+    booking: {
+      path: '/booking-management'
     }
   }
 } as const;
