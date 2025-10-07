@@ -18,6 +18,15 @@ BusManager System là một hệ thống quản lý xe buýt toàn diện đư�
 * **HTTP Client**: Axios 1.8.4
 * **Drag & Drop**: @dnd-kit
 
+## 👤 Tài khoản demo
+
+Dưới đây là thông tin tài khoản có thể sử dụng để đăng nhập và trải nghiệm hệ thống demo:
+
+| Role     | Email                   | Password |
+| -------- | ----------------------- | -------- |
+| Admin    | admin@test.com          | Test@1234|
+
+
 ## Yêu cầu hệ thống
 
 * **Node.js**: `^18.13.0` hoặc `^20.9.0`
