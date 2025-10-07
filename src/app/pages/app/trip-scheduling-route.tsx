@@ -75,6 +75,7 @@ const TripSchedulingRoute = () => {
         placeholder='Filter by status'
         allowClear
         style={{ width: 150 }}
+        value={tripStatus}
         onChange={handleStatusChange}
         options={[
           { label: 'On Time', value: TripStatus.ON_TIME },
@@ -88,6 +89,7 @@ const TripSchedulingRoute = () => {
         allowClear
         showSearch
         style={{ width: 250 }}
+        value={routeId}
         loading={routesQuery.isLoading}
         filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
         onChange={handleRouteChange}
@@ -102,6 +104,7 @@ const TripSchedulingRoute = () => {
         allowClear
         showSearch
         style={{ width: 200 }}
+        value={vehicleId}
         loading={vehiclesQuery.isLoading}
         filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
         onChange={handleVehicleChange}
