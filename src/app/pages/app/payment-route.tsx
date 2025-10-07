@@ -19,7 +19,7 @@ const PaymentRoute = () => {
   const [dateRange, setDateRange] = useState<[string, string] | null>(null);
 
   const { handleSubmit, form } = useCreatePaymentForm(setOpen);
-  const { tableState, setSearch, setPage, setPageSize } = useTableState();
+  const { tableState, setSearch, setPage, setPageSize, resetPage } = useTableState();
 
   const paymentsQuery = usePayments({
     params: {
@@ -44,6 +44,21 @@ const PaymentRoute = () => {
     }
   };
 
+  const handleStatusChange = (status?: PaymentStatus) => {
+    setPaymentStatus(status);
+    resetPage();
+  };
+
+  const handleMethodChange = (method?: PaymentMethod) => {
+    setPaymentMethod(method);
+    resetPage();
+  };
+
+  const handleDateRangeChange = (dates: [string, string] | null) => {
+    setDateRange(dates);
+    resetPage();
+  };
+
   return (
     <Container>
       <div className='flex items-center justify-between'>
@@ -57,9 +72,9 @@ const PaymentRoute = () => {
         <div className='flex items-center justify-between gap-4'>
           <SearchInput placeholder='Search payments...' handleSearch={(e) => handleSearch(e.target.value)} />
           <PaymentFilter
-            onStatusChange={setPaymentStatus}
-            onMethodChange={setPaymentMethod}
-            onDateRangeChange={setDateRange}
+            onStatusChange={handleStatusChange}
+            onMethodChange={handleMethodChange}
+            onDateRangeChange={handleDateRangeChange}
           />
         </div>
         <PaymentList paymentsQuery={paymentsQuery} onPaginationChange={handlePaginationChange} />

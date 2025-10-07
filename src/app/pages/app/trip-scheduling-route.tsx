@@ -8,7 +8,7 @@ import { useTableState } from '@app/hooks';
 import { PageTitle, SearchInput } from '@app/shared/components';
 import BoxLayout from '@app/shared/layouts/box-layout';
 import Container from '@app/shared/layouts/container';
-import { Button, Select, Space, Tabs } from 'antd';
+import { Button, Select, Space } from 'antd';
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useRoutes } from '@app/features/route-management/api/get-routes.api';
@@ -26,7 +26,7 @@ const TripSchedulingRoute = () => {
 
   const { handleSubmit, form } = useCreateTripForm(setOpen);
 
-  const { tableState, setSearch, setPage, setPageSize } = useTableState();
+  const { tableState, setSearch, setPage, setPageSize, resetPage } = useTableState();
 
   const routesQuery = useRoutes({ params: { pageSize: 100 } });
   const vehiclesQuery = useVehicles({ params: { pageSize: 100 } });
@@ -53,6 +53,21 @@ const TripSchedulingRoute = () => {
     }
   };
 
+  const handleStatusChange = (status?: TripStatus) => {
+    setTripStatus(status);
+    resetPage();
+  };
+
+  const handleRouteChange = (id?: number) => {
+    setRouteId(id);
+    resetPage();
+  };
+
+  const handleVehicleChange = (id?: number) => {
+    setVehicleId(id);
+    resetPage();
+  };
+
   const TripFilters = () => (
     <Space size='large'>
       <Select
@@ -60,7 +75,7 @@ const TripSchedulingRoute = () => {
         placeholder='Filter by status'
         allowClear
         style={{ width: 150 }}
-        onChange={setTripStatus}
+        onChange={handleStatusChange}
         options={[
           { label: 'On Time', value: TripStatus.ON_TIME },
           { label: 'Delayed', value: TripStatus.DELAYED },
@@ -75,7 +90,7 @@ const TripSchedulingRoute = () => {
         style={{ width: 250 }}
         loading={routesQuery.isLoading}
         filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
-        onChange={setRouteId}
+        onChange={handleRouteChange}
         options={routesQuery.data?.data.map((route) => ({
           label: route.route_name,
           value: route.id
@@ -89,7 +104,7 @@ const TripSchedulingRoute = () => {
         style={{ width: 200 }}
         loading={vehiclesQuery.isLoading}
         filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
-        onChange={setVehicleId}
+        onChange={handleVehicleChange}
         options={vehiclesQuery.data?.data.map((vehicle) => ({
           label: vehicle.license_plate,
           value: vehicle.id

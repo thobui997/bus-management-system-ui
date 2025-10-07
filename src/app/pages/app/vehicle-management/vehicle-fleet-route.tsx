@@ -15,7 +15,7 @@ import { PageTitle, SearchInput } from '@app/shared/components';
 import BoxLayout from '@app/shared/layouts/box-layout';
 import Container from '@app/shared/layouts/container';
 import TabLayout from '@app/shared/layouts/tab-layout/tab-layout';
-import { Button, Tabs } from 'antd';
+import { Button } from 'antd';
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
 
@@ -40,14 +40,16 @@ const VehicleFleetRoute = () => {
     tableState: vehicleTableState,
     setSearch: setVehicleSearch,
     setPage: setVehiclePage,
-    setPageSize: setVehiclePageSize
+    setPageSize: setVehiclePageSize,
+    resetPage: resetVehiclePage
   } = useTableState();
 
   const {
     tableState: maintenanceTableState,
     setSearch: setMaintenanceSearch,
     setPage: setMaintenancePage,
-    setPageSize: setMaintenancePageSize
+    setPageSize: setMaintenancePageSize,
+    resetPage: resetMaintenancePage
   } = useTableState();
 
   const vehiclesQuery = useVehicles({
@@ -72,10 +74,32 @@ const VehicleFleetRoute = () => {
 
   const handleVehicleSearch = (value: string) => {
     setVehicleSearch(value);
+    resetVehiclePage();
   };
 
   const handleMaintenanceSearch = (value: string) => {
     setMaintenanceSearch(value);
+    resetMaintenancePage();
+  };
+
+  const handleVehicleStatusChange = (status?: VehicleStatus) => {
+    setVehicleStatus(status);
+    resetVehiclePage();
+  };
+
+  const handleVehicleTypeChange = (typeId?: number) => {
+    setVehicleTypeId(typeId);
+    resetVehiclePage();
+  };
+
+  const handleMaintenanceStatusChange = (status?: MaintenanceLogStatus) => {
+    setMaintenanceStatus(status);
+    resetMaintenancePage();
+  };
+
+  const handleMaintenanceVehicleChange = (vehicleId?: number) => {
+    setMaintenanceVehicleId(vehicleId);
+    resetMaintenancePage();
   };
 
   const handleVehiclePaginationChange = (page: number, pageSize: number) => {
@@ -100,7 +124,7 @@ const VehicleFleetRoute = () => {
         <BoxLayout className='flex flex-col gap-6 h-full'>
           <div className='flex items-center justify-between gap-4'>
             <SearchInput placeholder='Search vehicles...' handleSearch={(e) => handleVehicleSearch(e.target.value)} />
-            <VehicleFilter onStatusChange={setVehicleStatus} onVehicleTypeChange={setVehicleTypeId} />
+            <VehicleFilter onStatusChange={handleVehicleStatusChange} onVehicleTypeChange={handleVehicleTypeChange} />
           </div>
           <VehicleList vehiclesQuery={vehiclesQuery} onPaginationChange={handleVehiclePaginationChange} />
         </BoxLayout>
@@ -116,7 +140,10 @@ const VehicleFleetRoute = () => {
               placeholder='Search maintenance logs...'
               handleSearch={(e) => handleMaintenanceSearch(e.target.value)}
             />
-            <MaintenanceLogFilter onStatusChange={setMaintenanceStatus} onVehicleChange={setMaintenanceVehicleId} />
+            <MaintenanceLogFilter
+              onStatusChange={handleMaintenanceStatusChange}
+              onVehicleChange={handleMaintenanceVehicleChange}
+            />
           </div>
           <MaintenanceLogList
             maintenanceLogsQuery={maintenanceLogsQuery}

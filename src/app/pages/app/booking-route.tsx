@@ -23,7 +23,7 @@ const BookingRoute = () => {
 
   const { handleSubmit, form } = useCreateBookingForm(setOpen);
   const { handleSubmit: handlePaymentSubmit, form: paymentForm } = useCreatePaymentForm(setPaymentModalOpen);
-  const { tableState, setSearch, setPage, setPageSize } = useTableState();
+  const { tableState, setSearch, setPage, setPageSize, resetPage } = useTableState();
 
   const bookingsQuery = useBookings({
     params: {
@@ -36,6 +36,12 @@ const BookingRoute = () => {
 
   const handleSearch = (value: string) => {
     setSearch(value);
+    resetPage();
+  };
+
+  const handleStatusChange = (status?: BookingStatus) => {
+    setBookingStatus(status);
+    resetPage();
   };
 
   const handlePaginationChange = (page: number, pageSize: number) => {
@@ -68,7 +74,7 @@ const BookingRoute = () => {
       <BoxLayout className='flex flex-col gap-6 overflow-hidden'>
         <div className='flex items-center justify-between gap-4'>
           <SearchInput placeholder='Search bookings...' handleSearch={(e) => handleSearch(e.target.value)} />
-          <BookingFilter onStatusChange={setBookingStatus} />
+          <BookingFilter onStatusChange={handleStatusChange} />
         </div>
         <BookingList
           bookingsQuery={bookingsQuery}

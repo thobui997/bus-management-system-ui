@@ -34,6 +34,10 @@ export const useTableState = (options: UseTableStateOptions = {}) => {
     setTableState((prev) => ({ ...prev, pageSize, page: 1 }));
   };
 
+  const resetPage = () => {
+    setTableState((prev) => ({ ...prev, page: 1 }));
+  };
+
   return {
     tableState: {
       ...tableState,
@@ -43,6 +47,7 @@ export const useTableState = (options: UseTableStateOptions = {}) => {
     setSearch,
     setPage,
     setPageSize,
-    setTableState
+    setTableState,
+    resetPage
   };
 };
