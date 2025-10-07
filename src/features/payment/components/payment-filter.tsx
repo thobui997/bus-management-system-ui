@@ -1,6 +1,6 @@
 import { PaymentMethod, PaymentStatus } from '@app/features/payment/types/payment.type';
 import { DatePicker, Select, Space } from 'antd';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 const { RangePicker } = DatePicker;
 

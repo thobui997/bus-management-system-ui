@@ -1,8 +1,7 @@
 import { useRoutes } from '@app/features/route-management/api/get-routes.api';
-import { useVehicles } from '@app/features/vehicle-management/vehicle-fleet/api/get-vehicles.api';
 import { TripStatus } from '@app/features/trip-scheduling/types/trip.type';
+import { useVehicles } from '@app/features/vehicle-management/vehicle-fleet/api/get-vehicles.api';
 import { DatePicker, Form, FormInstance, Modal, Select, TimePicker } from 'antd';
-import dayjs from '@app/lib/date-utils';
 
 type TripFormModalProps = {
   mode?: 'create' | 'edit';

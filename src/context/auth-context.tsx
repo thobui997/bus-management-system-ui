@@ -19,9 +19,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [searchParams] = useSearchParams();
 
   const [initialAuthInfo, setStoredValue] = useLocalStorage<AuthInfo | null>('authInfo', null);
-  const [initialUserInfo, setStoredUser] = useLocalStorage<User | null>('user', null);
+  const [initialUserInfo] = useLocalStorage<User | null>('user', null);
   const [authInfo, setAuthInfo] = useState<AuthInfo | null>(initialAuthInfo);
-  const [userInfo, setUserInfo] = useState<User | null>(initialUserInfo);
+  const [userInfo] = useState<User | null>(initialUserInfo);
   const notification = useNotification();
 
   const loginAction = async (payload: { email: string; password: string }) => {
@@ -31,26 +31,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setStoredValue(authInfo);
       setAuthInfo(authInfo);
 
-      // const userInfo = await getCurrentUser();
-      // setUserInfo(userInfo?.result || null);
-      // setStoredUser(userInfo?.result);
-
       const redirectTo = searchParams.get('redirectTo') || '/dashboard';
       navigate(redirectTo, { replace: true });
     } catch (err: any) {
       notification.showNotification('error', 'Đăng nhập thất bại', 'Email hoặc mật khẩu không đúng');
     }
   };
-
-  // const refreshUserInfo = async () => {
-  //   try {
-  //     const userInfo = await getCurrentUser();
-  //     setUserInfo(userInfo?.result || null);
-  //     setStoredUser(userInfo?.result);
-  //   } catch (error) {
-  //     console.error('Failed to refresh user info:', error);
-  //   }
-  // };
 
   return <AuthContext.Provider value={{ authInfo, loginAction, userInfo }}>{children}</AuthContext.Provider>;
 };

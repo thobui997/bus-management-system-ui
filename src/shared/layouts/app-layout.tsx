@@ -1,5 +1,4 @@
 import menuList from '@app/config/menu';
-import { paths } from '@app/config/paths';
 import { Affix, Layout, theme } from 'antd';
 import { useMemo, useState } from 'react';
 import { Outlet, useLocation } from 'react-router';
