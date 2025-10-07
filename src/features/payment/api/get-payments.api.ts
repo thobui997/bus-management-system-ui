@@ -18,10 +18,6 @@ export const getPaymentsApi = async (params: PaymentParams = {}) => {
     { count: 'exact' }
   );
 
-  if (search) {
-    query = query.or(`booking.customer.full_name.ilike.%${search}%,booking.customer.email.ilike.%${search}%`);
-  }
-
   if (status) {
     query = query.eq('status', status);
   }
@@ -42,23 +38,38 @@ export const getPaymentsApi = async (params: PaymentParams = {}) => {
     query = query.lte('transaction_time', date_to);
   }
 
-  const from = (page - 1) * pageSize;
-  const to = from + pageSize - 1;
-  query = query.range(from, to);
-
   query = query.order('transaction_time', { ascending: false });
 
-  const { data, error, count } = await query;
+  const { data, error } = await query;
 
   if (error) {
     throw new Error(error.message);
   }
 
-  const total = count ?? 0;
+  let filteredData = (data as Payment[]) || [];
+
+  // Filter by search term in memory
+  if (search) {
+    const searchLower = search.toLowerCase();
+    filteredData = filteredData.filter((payment) => {
+      const customerName = payment.booking?.customer?.full_name?.toLowerCase() || '';
+      const customerEmail = payment.booking?.customer?.email?.toLowerCase() || '';
+      const customerPhone = payment.booking?.customer?.phone_number?.toLowerCase() || '';
+      return (
+        customerName.includes(searchLower) || customerEmail.includes(searchLower) || customerPhone.includes(searchLower)
+      );
+    });
+  }
+
+  // Calculate pagination
+  const total = filteredData.length;
   const totalPages = Math.ceil(total / pageSize);
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize;
+  const paginatedData = filteredData.slice(from, to);
 
   return {
-    data: data as Payment[],
+    data: paginatedData,
     total,
     page,
     pageSize,

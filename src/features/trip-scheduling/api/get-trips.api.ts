@@ -34,10 +34,6 @@ export const getTripsApi = async (params: TripParams = {}) => {
     { count: 'exact' }
   );
 
-  if (search) {
-    query = query.or(`route.route_name.ilike.%${search}%,vehicle.license_plate.ilike.%${search}%`);
-  }
-
   if (status) {
     query = query.eq('status', status);
   }
@@ -59,23 +55,35 @@ export const getTripsApi = async (params: TripParams = {}) => {
     query = query.gte('departure_time', startOfDay.toISOString()).lte('departure_time', endOfDay.toISOString());
   }
 
-  const from = (page - 1) * pageSize;
-  const to = from + pageSize - 1;
-  query = query.range(from, to);
-
   query = query.order('departure_time', { ascending: false });
 
-  const { data, error, count } = await query;
+  const { data, error } = await query;
 
   if (error) {
     throw new Error(error.message);
   }
 
-  const total = count ?? 0;
+  let filteredData = (data as Trip[]) || [];
+
+  // Filter by search term in memory
+  if (search) {
+    const searchLower = search.toLowerCase();
+    filteredData = filteredData.filter((trip) => {
+      const routeName = trip.route?.route_name?.toLowerCase() || '';
+      const licensePlate = trip.vehicle?.license_plate?.toLowerCase() || '';
+      return routeName.includes(searchLower) || licensePlate.includes(searchLower);
+    });
+  }
+
+  // Calculate pagination
+  const total = filteredData.length;
   const totalPages = Math.ceil(total / pageSize);
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize;
+  const paginatedData = filteredData.slice(from, to);
 
   return {
-    data: data as Trip[],
+    data: paginatedData,
     total,
     page,
     pageSize,
