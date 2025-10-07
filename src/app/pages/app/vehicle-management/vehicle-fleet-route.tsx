@@ -14,6 +14,7 @@ import { useTableState } from '@app/hooks';
 import { PageTitle, SearchInput } from '@app/shared/components';
 import BoxLayout from '@app/shared/layouts/box-layout';
 import Container from '@app/shared/layouts/container';
+import TabLayout from '@app/shared/layouts/tab-layout/tab-layout';
 import { Button, Tabs } from 'antd';
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
@@ -96,7 +97,7 @@ const VehicleFleetRoute = () => {
       key: 'vehicles',
       label: 'Vehicles',
       children: (
-        <BoxLayout className='flex flex-col gap-6'>
+        <BoxLayout className='flex flex-col gap-6 h-full'>
           <div className='flex items-center justify-between gap-4'>
             <SearchInput placeholder='Search vehicles...' handleSearch={(e) => handleVehicleSearch(e.target.value)} />
             <VehicleFilter onStatusChange={setVehicleStatus} onVehicleTypeChange={setVehicleTypeId} />
@@ -109,7 +110,7 @@ const VehicleFleetRoute = () => {
       key: 'maintenance',
       label: 'Maintenance Logs',
       children: (
-        <BoxLayout className='flex flex-col gap-6'>
+        <BoxLayout className='flex flex-col gap-6 h-full'>
           <div className='flex items-center justify-between gap-4'>
             <SearchInput
               placeholder='Search maintenance logs...'
@@ -146,7 +147,7 @@ const VehicleFleetRoute = () => {
         </Button>
       </div>
 
-      <Tabs activeKey={activeTab} onChange={setActiveTab} items={tabItems} size='large' />
+      <TabLayout activeKey={activeTab} onChange={setActiveTab} items={tabItems} size='large' />
 
       {openVehicle && (
         <VehicleFormModal

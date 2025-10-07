@@ -13,6 +13,7 @@ import { Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useRoutes } from '@app/features/route-management/api/get-routes.api';
 import { useVehicles } from '@app/features/vehicle-management/vehicle-fleet/api/get-vehicles.api';
+import TabLayout from '@app/shared/layouts/tab-layout/tab-layout';
 
 const TripSchedulingRoute = () => {
   const [activeTab, setActiveTab] = useState('trips');
@@ -102,7 +103,7 @@ const TripSchedulingRoute = () => {
       key: 'trips',
       label: 'Trip List',
       children: (
-        <BoxLayout className='flex flex-col gap-6'>
+        <BoxLayout className='flex flex-col gap-6 h-full'>
           <div className='flex items-center justify-between gap-4'>
             <SearchInput placeholder='Search trips...' handleSearch={(e) => handleSearch(e.target.value)} />
             <TripFilters />
@@ -115,7 +116,7 @@ const TripSchedulingRoute = () => {
       key: 'calendar',
       label: 'Calendar View',
       children: (
-        <BoxLayout>
+        <BoxLayout className='h-full'>
           <TripCalendar />
         </BoxLayout>
       )
@@ -133,7 +134,7 @@ const TripSchedulingRoute = () => {
         )}
       </div>
 
-      <Tabs activeKey={activeTab} onChange={setActiveTab} items={tabItems} size='large' />
+      <TabLayout activeKey={activeTab} onChange={setActiveTab} items={tabItems} size='large' />
 
       {open && <TripFormModal open={open} setOpen={setOpen} form={form} handleSubmit={handleSubmit} />}
     </Container>
