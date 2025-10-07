@@ -27,7 +27,7 @@ export const getRoutesApi = async (params: RouteParams = {}) => {
   const to = from + pageSize - 1;
   query = query.range(from, to);
 
-  query = query.order('created_at', { ascending: false });
+  query = query.order('updated_at', { ascending: false });
 
   const { data, error, count } = await query;
 

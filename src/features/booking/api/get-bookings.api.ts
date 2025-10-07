@@ -26,7 +26,7 @@ export const getBookingsApi = async (params: BookingParams = {}) => {
     query = query.eq('trip_id', trip_id);
   }
 
-  query = query.order('created_at', { ascending: false });
+  query = query.order('updated_at', { ascending: false });
 
   const { data, error } = await query;
 

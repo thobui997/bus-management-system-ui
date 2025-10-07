@@ -29,7 +29,7 @@ export const getMaintenanceLogsApi = async (params: MaintenanceLogParams = {}) =
   const to = from + pageSize - 1;
   query = query.range(from, to);
 
-  query = query.order('schedule_date', { ascending: false });
+  query = query.order('updated_at', { ascending: false });
 
   const { data, error, count } = await query;
 

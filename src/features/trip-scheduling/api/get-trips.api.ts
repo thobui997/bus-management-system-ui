@@ -55,7 +55,7 @@ export const getTripsApi = async (params: TripParams = {}) => {
     query = query.gte('departure_time', startOfDay.toISOString()).lte('departure_time', endOfDay.toISOString());
   }
 
-  query = query.order('departure_time', { ascending: false });
+  query = query.order('updated_at', { ascending: false });
 
   const { data, error } = await query;
 
