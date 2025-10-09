@@ -123,7 +123,7 @@ const BookingDetailDrawer = ({ open, setOpen, bookingId }: BookingDetailDrawerPr
                 size='small'
                 bordered
               />
-              <div className='mt-4 p-3 bg-green-50 rounded flex justify-between items-center'>
+              <div className='mt-4 !p-3 bg-green-50 rounded flex justify-between items-center'>
                 <span className='font-semibold'>Total:</span>
                 <span className='text-xl font-bold text-green-600'>
                   {booking.tickets.reduce((sum, ticket) => sum + ticket.price, 0).toLocaleString('vi-VN')} đ
@@ -131,7 +131,7 @@ const BookingDetailDrawer = ({ open, setOpen, bookingId }: BookingDetailDrawerPr
               </div>
             </>
           ) : (
-            <div className='text-center py-8 text-gray-500'>No tickets found</div>
+            <div className='text-center !py-8 text-gray-500'>No tickets found</div>
           )}
         </Card>
       </Space>
