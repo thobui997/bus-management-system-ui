@@ -196,8 +196,7 @@ const BookingFormModal = ({
               />
             </Form.Item>
 
-            {/* IMPORTANT: Remove Form.Item wrapper, just display the value */}
-            <div className='mb-6'>
+            <div className='!mb-6'>
               <label className='block text-sm font-medium text-gray-700 mb-2'>Total Amount (VND)</label>
               <InputNumber
                 className='!w-full'
@@ -213,14 +212,14 @@ const BookingFormModal = ({
 
         {/* Right Column - Tickets Information */}
         <div className='pl-6'>
-          <div className='flex items-center justify-between mb-4'>
+          <div className='flex items-center justify-between !mb-4'>
             <h3 className='text-lg font-semibold'>Tickets ({tickets.length})</h3>
             <Button type='dashed' icon={<Plus size={16} />} onClick={handleAddTicket} size='large'>
               Add Ticket
             </Button>
           </div>
 
-          <div className='flex flex-col gap-3 max-h-[500px] overflow-y-auto pr-2'>
+          <div className='flex flex-col gap-3 max-h-[500px] overflow-y-auto !pr-2'>
             {tickets.length === 0 ? (
               <Card className='text-center py-8 bg-gray-50'>
                 <p className='text-gray-500'>No tickets yet. Click "Add Ticket" to create one.</p>
@@ -228,7 +227,7 @@ const BookingFormModal = ({
             ) : (
               tickets.map((ticket, index) => (
                 <Card key={index} size='small' className='shadow-sm hover:shadow-md transition-shadow'>
-                  <div className='flex items-center gap-2 mb-3'>
+                  <div className='flex items-center gap-2 !mb-3'>
                     <div className='bg-blue-500 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold'>
                       {index + 1}
                     </div>
@@ -249,7 +248,7 @@ const BookingFormModal = ({
 
                   <Space direction='vertical' className='w-full' size='middle'>
                     <div>
-                      <label className='text-xs text-gray-600 font-medium mb-1 block'>
+                      <label className='text-xs text-gray-600 font-medium !mb-2 block'>
                         Seat Number <span className='text-red-500'>*</span>
                       </label>
                       <Input
@@ -263,7 +262,7 @@ const BookingFormModal = ({
                     </div>
 
                     <div>
-                      <label className='text-xs text-gray-600 font-medium mb-1 block'>
+                      <label className='text-xs text-gray-600 font-medium !mb-2 block'>
                         Price (VND) <span className='text-red-500'>*</span>
                       </label>
                       <InputNumber
@@ -283,7 +282,7 @@ const BookingFormModal = ({
                     </div>
 
                     <div>
-                      <label className='text-xs text-gray-600 font-medium mb-1 block'>QR Code (Optional)</label>
+                      <label className='text-xs text-gray-600 font-medium !mb-2 block'>QR Code (Optional)</label>
                       <Input
                         value={ticket.qrcode || ''}
                         onChange={(e) => handleTicketChange(index, 'qrcode', e.target.value)}
@@ -299,12 +298,12 @@ const BookingFormModal = ({
 
           {/* Summary */}
           {tickets.length > 0 && (
-            <Card size='small' className='mt-4 bg-gradient-to-r from-green-50 to-blue-50 border-green-200'>
-              <div className='flex justify-between items-center mb-2'>
+            <Card size='small' className='!mt-4 bg-gradient-to-r from-green-50 to-blue-50 border-green-200'>
+              <div className='flex justify-between items-center !mb-2'>
                 <span className='font-semibold text-gray-700'>Total Tickets:</span>
                 <span className='text-lg font-bold text-blue-600'>{tickets.length}</span>
               </div>
-              <Divider className='my-2' />
+              <Divider className='!my-2' />
               <div className='flex justify-between items-center'>
                 <span className='font-semibold text-gray-700'>Total Amount:</span>
                 <span className='text-xl font-bold text-green-600'>{totalAmount.toLocaleString('vi-VN')} đ</span>
