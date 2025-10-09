@@ -33,13 +33,13 @@ const DashboardRoute = () => {
   }
 
   return (
-    <Container>
+    <div className='flex flex-col gap-4 h-full'>
       {/* Header */}
       <div className='mb-6'>
         <PageTitle title='Dashboard' subTitle='Quick insights and performance overview' />
       </div>
 
-      <div className='flex-1 flex flex-col gap-8 overflow-y-auto'>
+      <div className='flex-1 flex flex-col gap-8 overflow-y-auto overflow-x-hidden scrollbar-auto-hide'>
         {/* Top Summary Section */}
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={12} lg={8}>
@@ -145,7 +145,7 @@ const DashboardRoute = () => {
           </Col>
         </Row>
       </div>
-    </Container>
+    </div>
   );
 };
 

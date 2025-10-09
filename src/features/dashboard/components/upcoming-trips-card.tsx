@@ -35,7 +35,7 @@ const UpcomingTripsCard = () => {
           className='max-h-80 overflow-y-auto'
           renderItem={(trip) => (
             <List.Item>
-              <div className='flex justify-between items-center w-full'>
+              <div className='flex justify-between items-center w-full px-2'>
                 <div className='flex-1'>
                   <Text strong>{trip.route_name}</Text>
                   <div className='text-sm text-gray-500'>Vehicle: {trip.vehicle_license || 'N/A'}</div>
@@ -48,7 +48,7 @@ const UpcomingTripsCard = () => {
                   </div>
                 </div>
 
-                <Tag color={getStatusColor(trip.status)}>
+                <Tag color={getStatusColor(trip.status)} className='!mr-0'>
                   {trip.status === TripStatus.ON_TIME ? 'ON TIME' : trip.status?.toString().toUpperCase()}
                 </Tag>
               </div>

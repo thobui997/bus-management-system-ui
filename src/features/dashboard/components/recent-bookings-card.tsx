@@ -34,7 +34,7 @@ const RecentBookingsCard = () => {
           className='max-h-80 overflow-y-auto'
           renderItem={(booking) => (
             <List.Item>
-              <div className='flex justify-between items-center w-full'>
+              <div className='flex justify-between items-center w-full !px-2'>
                 <div className='flex-1'>
                   <Text strong>#{booking.id}</Text>
                   <div className='text-sm text-gray-500'>{booking.customer_name}</div>
@@ -45,7 +45,7 @@ const RecentBookingsCard = () => {
                 </div>
                 <div className='text-right'>
                   <div className='font-semibold text-green-600'>{booking.total_amount.toLocaleString('vi-VN')} đ</div>
-                  <Tag color={getStatusColor(booking.status)} className='mt-1'>
+                  <Tag color={getStatusColor(booking.status)} className='!mt-1 !mr-0'>
                     {booking.status === 'pendingPayment' ? 'PENDING' : booking.status.toUpperCase()}
                   </Tag>
                 </div>
