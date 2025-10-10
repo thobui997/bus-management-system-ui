@@ -52,13 +52,18 @@ const BookingRoute = () => {
   };
 
   const handleCreatePayment = (booking: Booking) => {
-    paymentForm.setFieldsValue({
-      booking_id: booking.id,
-      amount: booking.total_amount,
-      payment_method: PaymentMethod.CASH,
-      transaction_time: dayjs(),
-      status: PaymentStatus.SUCCESS
-    });
+    paymentForm.resetFields();
+
+    setTimeout(() => {
+      paymentForm.setFieldsValue({
+        booking_id: booking.id,
+        amount: booking.total_amount,
+        payment_method: PaymentMethod.CASH,
+        transaction_time: dayjs(),
+        status: PaymentStatus.SUCCESS
+      });
+    }, 0);
+
     setPaymentModalOpen(true);
   };
 
@@ -91,6 +96,7 @@ const BookingRoute = () => {
           setOpen={setPaymentModalOpen}
           form={paymentForm}
           handleSubmit={handlePaymentSubmit}
+          isFromBooking={true}
         />
       )}
     </Container>

@@ -10,9 +10,17 @@ type PaymentFormModalProps = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   form: FormInstance<any>;
   handleSubmit: () => Promise<void>;
+  isFromBooking?: boolean;
 };
 
-const PaymentFormModal = ({ open, setOpen, form, handleSubmit, mode = 'create' }: PaymentFormModalProps) => {
+const PaymentFormModal = ({
+  open,
+  setOpen,
+  form,
+  handleSubmit,
+  mode = 'create',
+  isFromBooking = false
+}: PaymentFormModalProps) => {
   const bookingsQuery = useBookings({
     params: { pageSize: 100, status: BookingStatus.PENDING_PAYMENT }
   });
@@ -20,13 +28,13 @@ const PaymentFormModal = ({ open, setOpen, form, handleSubmit, mode = 'create' }
   const selectedBookingId = Form.useWatch('booking_id', form);
 
   useEffect(() => {
-    if (selectedBookingId && bookingsQuery.data) {
+    if (selectedBookingId && bookingsQuery.data && !isFromBooking) {
       const selectedBooking = bookingsQuery.data.data.find((b) => b.id === selectedBookingId);
       if (selectedBooking) {
         form.setFieldValue('amount', selectedBooking.total_amount);
       }
     }
-  }, [selectedBookingId, bookingsQuery.data, form]);
+  }, [selectedBookingId, bookingsQuery.data, form, isFromBooking]);
 
   return (
     <Modal
@@ -51,7 +59,7 @@ const PaymentFormModal = ({ open, setOpen, form, handleSubmit, mode = 'create' }
             placeholder='Select booking'
             showSearch
             loading={bookingsQuery.isLoading}
-            disabled={mode === 'edit'}
+            disabled={mode === 'edit' || isFromBooking}
             filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
             options={bookingsQuery.data?.data.map((booking) => ({
               label: `#${booking.id} - ${booking.customer?.full_name} (${booking.total_amount.toLocaleString('vi-VN')} đ)`,
