@@ -1,8 +1,8 @@
-# BusManager System
+# FleetGo System
 
 ## Tổng quan dự án
 
-BusManager System là một hệ thống quản lý xe buýt toàn diện được xây dựng bằng React, TypeScript và Supabase. Hệ thống cung cấp các công cụ quản lý hoàn chỉnh cho việc vận hành dịch vụ xe buýt, từ quản lý phương tiện, tuyến đường, lịch trình đến đặt vé và thanh toán.
+FleetGo System là một hệ thống quản lý xe buýt toàn diện được xây dựng bằng React, TypeScript và Supabase. Hệ thống cung cấp các công cụ quản lý hoàn chỉnh cho việc vận hành dịch vụ xe buýt, từ quản lý phương tiện, tuyến đường, lịch trình đến đặt vé và thanh toán.
 
 ## Công nghệ sử dụng
 

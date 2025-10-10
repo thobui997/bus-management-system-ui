@@ -20,7 +20,7 @@ const LoginForm = () => {
         <div className='login-image-container'>
           <img src='https://illustrations.popsy.co/amber/remote-work.svg' alt='Bus Management System' />
           <div className='login-title'>
-            <h1>BusManager System</h1>
+            <h1>FleetGo System</h1>
             <p>Manage your fleet with ease and efficiency</p>
           </div>
         </div>
@@ -34,7 +34,7 @@ const LoginForm = () => {
               <div className='logo-image'>
                 <img src='/images/bus.png' alt='logo' />
               </div>
-              <div className='logo-text'>BusManager</div>
+              <div className='logo-text'>FleetGo</div>
             </div>
             <h2>Welcome Back</h2>
             <p>Please sign in to your account</p>

@@ -43,7 +43,7 @@ const AppLayout = () => {
               <div className='logo-image'>
                 <img src='/images/bus.png' alt='logo' width={20} height={20} />
               </div>
-              <div className='logo-text'>BusManager System</div>
+              <div className='logo-text'>FleetGo System</div>
             </div>
           </div>
           <MenuComponent
